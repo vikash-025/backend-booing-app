@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
-import Admin from "../models/Admin";
-import Movie from "../models/Movie";
-export const addMovie = async (req, res, next) => {
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const Admin = require("../models/Admin");
+const Movie = require("../models/Movie");
+module.exports.addMovie = async (req, res, next) => {
   const extractedToken = req.headers.authorization.split(" ")[1];
   if (!extractedToken && extractedToken.trim() === "") {
     return res.status(404).json({ message: "Token Not Found" });
@@ -63,7 +63,7 @@ export const addMovie = async (req, res, next) => {
   return res.status(201).json({ movie });
 };
 
-export const getAllMovies = async (req, res, next) => {
+module.exports.getAllMovies = async (req, res, next) => {
   let movies;
 
   try {
@@ -78,7 +78,7 @@ export const getAllMovies = async (req, res, next) => {
   return res.status(200).json({ movies });
 };
 
-export const getMovieById = async (req, res, next) => {
+module.exports.getMovieById = async (req, res, next) => {
   const id = req.params.id;
   let movie;
   try {

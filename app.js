@@ -1,12 +1,12 @@
-import cors from "cors";
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+const cors = require("cors");
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
-import adminRouter from "./routes/admin-routes";
-import movieRouter from "./routes/movie-routes";
-import bookingsRouter from "./routes/booking-routes";
-import userRouter from "./routes/user-routes";
+const adminRouter = require("./routes/admin-routes");
+const movieRouter = require("./routes/movie-routes");
+const bookingsRouter = require("./routes/booking-routes");
+const userRouter = require("./routes/user-routes");
 
 dotenv.config();
 

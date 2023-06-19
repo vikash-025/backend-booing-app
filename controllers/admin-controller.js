@@ -1,8 +1,8 @@
-import Admin from "../models/Admin";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+const Admin = require("../models/Admin");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-export const addAdmin = async (req, res, next) => {
+module.exports.addAdmin = async (req, res, next) => {
   const { email, password } = req.body;
   if (!email && email.trim() === "" && !password && password.trim() === "") {
     return res.status(422).json({ message: "Invalid Inputs" });
@@ -33,7 +33,7 @@ export const addAdmin = async (req, res, next) => {
   return res.status(201).json({ admin });
 };
 
-export const adminLogin = async (req, res, next) => {
+module.exports.adminLogin = async (req, res, next) => {
   const { email, password } = req.body;
   if (!email && email.trim() === "" && !password && password.trim() === "") {
     return res.status(422).json({ message: "Invalid Inputs" });
@@ -65,7 +65,7 @@ export const adminLogin = async (req, res, next) => {
     .json({ message: "Authentication Complete", token, id: existingAdmin._id });
 };
 
-export const getAdmins = async (req, res, next) => {
+module.exports.getAdmins = async (req, res, next) => {
   let admins;
   try {
     admins = await Admin.find();
@@ -78,7 +78,7 @@ export const getAdmins = async (req, res, next) => {
   return res.status(200).json({ admins });
 };
 
-export const getAdminById = async (req, res, next) => {
+module.exports.getAdminById = async (req, res, next) => {
   const id = req.params.id;
 
   let admin;

@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
-import Bookings from "../models/Bookings";
-import Movie from "../models/Movie";
-import User from "../models/User";
+const mongoose = require("mongoose");
+const Bookings = require("../models/Bookings");
+const Movie = require("../models/Movie");
+const User = require("../models/User");
 
-export const newBooking = async (req, res, next) => {
+module.exports.newBooking = async (req, res, next) => {
   const { movie, date, seatNumber, user } = req.body;
 
   let existingMovie;
@@ -48,7 +48,7 @@ export const newBooking = async (req, res, next) => {
   return res.status(201).json({ booking });
 };
 
-export const getBookingById = async (req, res, next) => {
+module.exports.getBookingById = async (req, res, next) => {
   const id = req.params.id;
   let booking;
   try {
@@ -62,7 +62,7 @@ export const getBookingById = async (req, res, next) => {
   return res.status(200).json({ booking });
 };
 
-export const deleteBooking = async (req, res, next) => {
+module.exports.deleteBooking = async (req, res, next) => {
   const id = req.params.id;
   let booking;
   try {

@@ -1,7 +1,7 @@
-import User from "../models/User";
-import bcrypt from "bcryptjs";
-import Bookings from "../models/Bookings";
-export const getAllUsers = async (req, res, next) => {
+const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+const Bookings = require("../models/Bookings");
+module.exports.getAllUsers = async (req, res, next) => {
   let users;
   try {
     users = await User.find();
@@ -14,7 +14,7 @@ export const getAllUsers = async (req, res, next) => {
   return res.status(200).json({ users });
 };
 
-export const singup = async (req, res, next) => {
+module.exports.singup = async (req, res, next) => {
   const { name, email, password } = req.body;
   if (
     !name &&
@@ -39,7 +39,7 @@ export const singup = async (req, res, next) => {
   }
   return res.status(201).json({ id: user._id });
 };
-export const updateUser = async (req, res, next) => {
+module.exports.updateUser = async (req, res, next) => {
   const id = req.params.id;
   const { name, email, password } = req.body;
   if (
@@ -70,7 +70,7 @@ export const updateUser = async (req, res, next) => {
   res.status(200).json({ message: "Updated Sucessfully" });
 };
 
-export const deleteUser = async (req, res, next) => {
+module.exports.deleteUser = async (req, res, next) => {
   const id = req.params.id;
   let user;
   try {
@@ -84,7 +84,7 @@ export const deleteUser = async (req, res, next) => {
   return res.status(200).json({ message: "Deleted Successfully" });
 };
 
-export const login = async (req, res, next) => {
+module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   if (!email && email.trim() === "" && !password && password.trim() === "") {
     return res.status(422).json({ message: "Invalid Inputs" });
@@ -99,7 +99,7 @@ export const login = async (req, res, next) => {
   if (!existingUser) {
     return res
       .status(404)
-      .json({ message: "Unable to find user from this ID" });
+      .json({ message: "Unable to find user =require this ID" });
   }
 
   const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
@@ -112,7 +112,7 @@ export const login = async (req, res, next) => {
     .status(200)
     .json({ message: "Login Successfull", id: existingUser._id });
 };
-export const getBookingsOfUser = async (req, res, next) => {
+module.exports.getBookingsOfUser = async (req, res, next) => {
   const id = req.params.id;
   let bookings;
   try {
@@ -127,7 +127,7 @@ export const getBookingsOfUser = async (req, res, next) => {
   }
   return res.status(200).json({ bookings });
 };
-export const getUserById = async (req, res, next) => {
+module.exports.getUserById = async (req, res, next) => {
   const id = req.params.id;
   let user;
   try {
